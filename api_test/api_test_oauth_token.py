@@ -58,34 +58,3 @@ def generate_timestamp():
     return timestamp
 
 
-#def generate_valid_access_token():
-    """
-    Generates a valid access token by sending a POST request to the specified token URL with the client ID and client secret.
-    This is then used throughout the api_test and py_test
-
-    Returns:
-    - Access token (str) if the request is successful.
-    - None if there is an error with the request.
-    """
-    url = os.environ['TOKEN_URL']
-    headers = {
-        'Content-Type': 'application/json'
-    }
-
-    data = {
-        "clientId": os.environ['VALID_CLIENT_ID'],
-        "clientSecret": os.environ['VALID_CLIENT_SECRET']
-    }
-
-    try:
-        response = requests.post(url, headers=headers, json=data)
-        response.raise_for_status()
-
-        response_json = response.json()
-        access_token = response_json.get('accessToken')
-
-        return access_token
-
-    except requests.exceptions.RequestException as e:
-        print(f"Error: {e}")
-        return None
