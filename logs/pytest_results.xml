@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite errors="0" failures="3" hostname="LlewellynPC" name="pytest" skipped="0" tests="11" time="56.762" timestamp="2023-08-05T10:48:10.362167"><testcase classname="py_test.api_test" name="test_valid_credentials_access_token_request" time="0.823" /><testcase classname="py_test.api_test" name="test_invalid_credentials_access_token_request" time="1.605"><failure message="assert 500 == 401&#10; +  where 500 = &lt;Response [500]&gt;.status_code">def test_invalid_credentials_access_token_request():
+        headers = {
+            'Content-Type': 'application/json'
+        }
+        data = {
+            "clientId": valid_client_id,
+            "clientSecret": "sL0uix7wwHk6HUN7P66ogyfv246oxgEL"
+        }
+        response = requests.post(TOKEN_URL,headers=headers ,json=data)
+&gt;       assert response.status_code == 401
+E       assert 500 == 401
+E        +  where 500 = &lt;Response [500]&gt;.status_code
+
+py_test\api_test.py:67: AssertionError</failure></testcase><testcase classname="py_test.api_test" name="test_missing_data_access_token_request" time="0.859" /><testcase classname="py_test.api_test" name="test_valid_response_types_request" time="0.872" /><testcase classname="py_test.api_test" name="test_unauthorized_response_types_request" time="0.805" /><testcase classname="py_test.api_test" name="test_expired_access_token_response_types_request" time="1.158"><failure message="assert 200 == 401&#10; +  where 200 = &lt;Response [200]&gt;.status_code">def test_expired_access_token_response_types_request():
+        headers = {
+            'Authorization': f'Bearer {valid_access_token}'
+        }
+        response = requests.get(RESPONSE_TYPES_URL, headers=headers)
+&gt;       assert response.status_code == 401
+E       assert 200 == 401
+E        +  where 200 = &lt;Response [200]&gt;.status_code
+
+py_test\api_test.py:104: AssertionError</failure></testcase><testcase classname="py_test.api_test" name="test_rate_limiting_response_types_request" time="45.732"><failure message="assert 200 == 429">def test_rate_limiting_response_types_request():
+        headers = {
+            'Authorization': f'Bearer {valid_access_token}'
+        }
+        for _ in range(50):
+            response = requests.get(RESPONSE_TYPES_URL, headers=headers)
+            status_code = response.status_code
+    
+&gt;       assert status_code == 429
+E       assert 200 == 429
+
+py_test\api_test.py:115: AssertionError</failure></testcase><testcase classname="py_test.api_test" name="test_invalid_endpoint" time="1.093" /><testcase classname="py_test.api_test" name="test_response_time" time="0.989" /><testcase classname="py_test.api_test" name="test_special_characters_request" time="0.982" /><testcase classname="py_test.api_test" name="test_compare_response_to_expected_response" time="0.846" /></testsuite></testsuites>

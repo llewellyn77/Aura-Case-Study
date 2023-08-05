@@ -1,0 +1,362 @@
+Tests run on: 2023-08-05 10:23:12
+
+============================= test session starts =============================
+platform win32 -- Python 3.7.9, pytest-7.4.0, pluggy-1.2.0 -- c:\users\llew\documents\llewellyn_storage\aura_qa_case_study\venv\scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\Llew\Documents\Llewellyn_Storage\Aura_QA_Case_Study
+collecting ... Token generated successfully
+collected 11 items
+
+py_test/api_test.py::test_valid_credentials_access_token_request PASSED
+py_test/api_test.py::test_invalid_credentials_access_token_request FAILED
+py_test/api_test.py::test_missing_data_access_token_request PASSED
+py_test/api_test.py::test_valid_response_types_request 
+PASSED
+py_test/api_test.py::test_unauthorized_response_types_request PASSED
+py_test/api_test.py::test_expired_access_token_response_types_request FAILED
+py_test/api_test.py::test_rate_limiting_response_types_request FAILED
+py_test/api_test.py::test_invalid_endpoint PASSED
+py_test/api_test.py::test_response_time PASSED
+py_test/api_test.py::test_special_characters_request PASSED
+py_test/api_test.py::test_compare_response_to_expected_response PASSED
+
+================================== FAILURES ===================================
+________________ test_invalid_credentials_access_token_request ________________
+
+    def test_invalid_credentials_access_token_request():
+        headers = {
+            'Content-Type': 'application/json'
+        }
+        data = {
+            "clientId": valid_client_id,
+            "clientSecret": "sL0uix7wwHk6HUN7P66ogyfv246oxgEL"
+        }
+        response = requests.post(TOKEN_URL,headers=headers ,json=data)
+>       assert response.status_code == 401
+E       assert 500 == 401
+E        +  where 500 = <Response [500]>.status_code
+
+py_test\api_test.py:67: AssertionError
+______________ test_expired_access_token_response_types_request _______________
+
+    def test_expired_access_token_response_types_request():
+        headers = {
+            'Authorization': f'Bearer {valid_access_token}'
+        }
+        response = requests.get(RESPONSE_TYPES_URL, headers=headers)
+>       assert response.status_code == 401
+E       assert 200 == 401
+E        +  where 200 = <Response [200]>.status_code
+
+py_test\api_test.py:104: AssertionError
+__________________ test_rate_limiting_response_types_request __________________
+
+    def test_rate_limiting_response_types_request():
+        headers = {
+            'Authorization': f'Bearer {valid_access_token}'
+        }
+        for _ in range(50):
+            response = requests.get(RESPONSE_TYPES_URL, headers=headers)
+            status_code = response.status_code
+    
+>       assert status_code == 429
+E       assert 200 == 429
+
+py_test\api_test.py:115: AssertionError
+- generated xml file: C:\Users\Llew\Documents\Llewellyn_Storage\Aura_QA_Case_Study\logs\pytest_results.xml -
+=========================== short test summary info ===========================
+FAILED py_test/api_test.py::test_invalid_credentials_access_token_request - a...
+FAILED py_test/api_test.py::test_expired_access_token_response_types_request
+FAILED py_test/api_test.py::test_rate_limiting_response_types_request - asser...
+======================== 3 failed, 8 passed in 57.23s =========================
+Tests run on: 2023-08-05 10:26:50
+
+============================= test session starts =============================
+platform win32 -- Python 3.7.9, pytest-7.4.0, pluggy-1.2.0 -- c:\users\llew\documents\llewellyn_storage\aura_qa_case_study\venv\scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\Llew\Documents\Llewellyn_Storage\Aura_QA_Case_Study
+collecting ... Token generated successfully
+collected 11 items
+
+py_test/api_test.py::test_valid_credentials_access_token_request PASSED
+py_test/api_test.py::test_invalid_credentials_access_token_request FAILED
+py_test/api_test.py::test_missing_data_access_token_request PASSED
+py_test/api_test.py::test_valid_response_types_request 
+PASSED
+py_test/api_test.py::test_unauthorized_response_types_request PASSED
+py_test/api_test.py::test_expired_access_token_response_types_request FAILED
+py_test/api_test.py::test_rate_limiting_response_types_request FAILED
+py_test/api_test.py::test_invalid_endpoint PASSED
+py_test/api_test.py::test_response_time PASSED
+py_test/api_test.py::test_special_characters_request PASSED
+py_test/api_test.py::test_compare_response_to_expected_response PASSED
+
+================================== FAILURES ===================================
+________________ test_invalid_credentials_access_token_request ________________
+
+    def test_invalid_credentials_access_token_request():
+        headers = {
+            'Content-Type': 'application/json'
+        }
+        data = {
+            "clientId": valid_client_id,
+            "clientSecret": "sL0uix7wwHk6HUN7P66ogyfv246oxgEL"
+        }
+        response = requests.post(TOKEN_URL,headers=headers ,json=data)
+>       assert response.status_code == 401
+E       assert 500 == 401
+E        +  where 500 = <Response [500]>.status_code
+
+py_test\api_test.py:67: AssertionError
+______________ test_expired_access_token_response_types_request _______________
+
+    def test_expired_access_token_response_types_request():
+        headers = {
+            'Authorization': f'Bearer {valid_access_token}'
+        }
+        response = requests.get(RESPONSE_TYPES_URL, headers=headers)
+>       assert response.status_code == 401
+E       assert 200 == 401
+E        +  where 200 = <Response [200]>.status_code
+
+py_test\api_test.py:104: AssertionError
+__________________ test_rate_limiting_response_types_request __________________
+
+    def test_rate_limiting_response_types_request():
+        headers = {
+            'Authorization': f'Bearer {valid_access_token}'
+        }
+        for _ in range(50):
+            response = requests.get(RESPONSE_TYPES_URL, headers=headers)
+            status_code = response.status_code
+    
+>       assert status_code == 429
+E       assert 200 == 429
+
+py_test\api_test.py:115: AssertionError
+- generated xml file: C:\Users\Llew\Documents\Llewellyn_Storage\Aura_QA_Case_Study\logs\pytest_results.xml -
+=========================== short test summary info ===========================
+FAILED py_test/api_test.py::test_invalid_credentials_access_token_request - a...
+FAILED py_test/api_test.py::test_expired_access_token_response_types_request
+FAILED py_test/api_test.py::test_rate_limiting_response_types_request - asser...
+======================== 3 failed, 8 passed in 54.14s =========================
+Tests run on: 2023-08-05 10:45:15
+
+============================= test session starts =============================
+platform win32 -- Python 3.7.9, pytest-7.4.0, pluggy-1.2.0 -- c:\users\llew\documents\llewellyn_storage\aura_qa_case_study\venv\scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\Llew\Documents\Llewellyn_Storage\Aura_QA_Case_Study
+collecting ... Token generated successfully
+collected 11 items
+
+py_test/api_test.py::test_valid_credentials_access_token_request PASSED
+py_test/api_test.py::test_invalid_credentials_access_token_request FAILED
+py_test/api_test.py::test_missing_data_access_token_request PASSED
+py_test/api_test.py::test_valid_response_types_request 
+PASSED
+py_test/api_test.py::test_unauthorized_response_types_request PASSED
+py_test/api_test.py::test_expired_access_token_response_types_request FAILED
+py_test/api_test.py::test_rate_limiting_response_types_request FAILED
+py_test/api_test.py::test_invalid_endpoint PASSED
+py_test/api_test.py::test_response_time FAILED
+py_test/api_test.py::test_special_characters_request PASSED
+py_test/api_test.py::test_compare_response_to_expected_response PASSED
+
+================================== FAILURES ===================================
+________________ test_invalid_credentials_access_token_request ________________
+
+    def test_invalid_credentials_access_token_request():
+        headers = {
+            'Content-Type': 'application/json'
+        }
+        data = {
+            "clientId": valid_client_id,
+            "clientSecret": "sL0uix7wwHk6HUN7P66ogyfv246oxgEL"
+        }
+        response = requests.post(TOKEN_URL,headers=headers ,json=data)
+>       assert response.status_code == 401
+E       assert 500 == 401
+E        +  where 500 = <Response [500]>.status_code
+
+py_test\api_test.py:67: AssertionError
+______________ test_expired_access_token_response_types_request _______________
+
+    def test_expired_access_token_response_types_request():
+        headers = {
+            'Authorization': f'Bearer {valid_access_token}'
+        }
+        response = requests.get(RESPONSE_TYPES_URL, headers=headers)
+>       assert response.status_code == 401
+E       assert 200 == 401
+E        +  where 200 = <Response [200]>.status_code
+
+py_test\api_test.py:104: AssertionError
+__________________ test_rate_limiting_response_types_request __________________
+
+    def test_rate_limiting_response_types_request():
+        headers = {
+            'Authorization': f'Bearer {valid_access_token}'
+        }
+        for _ in range(50):
+            response = requests.get(RESPONSE_TYPES_URL, headers=headers)
+            status_code = response.status_code
+    
+>       assert status_code == 429
+E       assert 200 == 429
+
+py_test\api_test.py:115: AssertionError
+_____________________________ test_response_time ______________________________
+
+    def test_response_time():
+        start_time = time.time()
+        headers = {
+            'Authorization': f'Bearer {valid_access_token}'
+        }
+        response = requests.get(RESPONSE_TYPES_URL,headers=headers)
+        end_time = time.time()
+        response_time = end_time - start_time
+        max_response_time = 1.0  # Set a maximum acceptable response time in seconds
+>       assert response_time <= max_response_time
+E       assert 1.0706830024719238 <= 1.0
+
+py_test\api_test.py:136: AssertionError
+- generated xml file: C:\Users\Llew\Documents\Llewellyn_Storage\Aura_QA_Case_Study\logs\pytest_results.xml -
+=========================== short test summary info ===========================
+FAILED py_test/api_test.py::test_invalid_credentials_access_token_request - a...
+FAILED py_test/api_test.py::test_expired_access_token_response_types_request
+FAILED py_test/api_test.py::test_rate_limiting_response_types_request - asser...
+FAILED py_test/api_test.py::test_response_time - assert 1.0706830024719238 <=...
+=================== 4 failed, 7 passed in 63.11s (0:01:03) ====================
+05-2023-08 10:45:23,24
+============================= test session starts =============================
+platform win32 -- Python 3.7.9, pytest-7.4.0, pluggy-1.2.0
+rootdir: C:\Users\Llew\Documents\Llewellyn_Storage\Aura_QA_Case_Study
+collected 11 items
+
+py_test\api_test.py .F...FTests run on: 2023-08-05 10:49:07
+
+============================= test session starts =============================
+platform win32 -- Python 3.7.9, pytest-7.4.0, pluggy-1.2.0 -- c:\users\llew\documents\llewellyn_storage\aura_qa_case_study\venv\scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\Llew\Documents\Llewellyn_Storage\Aura_QA_Case_Study
+collecting ... Token generated successfully
+collected 11 items
+
+py_test/api_test.py::test_valid_credentials_access_token_request PASSED
+py_test/api_test.py::test_invalid_credentials_access_token_request FAILED
+py_test/api_test.py::test_missing_data_access_token_request PASSED
+py_test/api_test.py::test_valid_response_types_request 
+PASSED
+py_test/api_test.py::test_unauthorized_response_types_request PASSED
+py_test/api_test.py::test_expired_access_token_response_types_request FAILED
+py_test/api_test.py::test_rate_limiting_response_types_request FAILED
+py_test/api_test.py::test_invalid_endpoint PASSED
+py_test/api_test.py::test_response_time PASSED
+py_test/api_test.py::test_special_characters_request PASSED
+py_test/api_test.py::test_compare_response_to_expected_response PASSED
+
+================================== FAILURES ===================================
+________________ test_invalid_credentials_access_token_request ________________
+
+    def test_invalid_credentials_access_token_request():
+        headers = {
+            'Content-Type': 'application/json'
+        }
+        data = {
+            "clientId": valid_client_id,
+            "clientSecret": "sL0uix7wwHk6HUN7P66ogyfv246oxgEL"
+        }
+        response = requests.post(TOKEN_URL,headers=headers ,json=data)
+>       assert response.status_code == 401
+E       assert 500 == 401
+E        +  where 500 = <Response [500]>.status_code
+
+py_test\api_test.py:67: AssertionError
+______________ test_expired_access_token_response_types_request _______________
+
+    def test_expired_access_token_response_types_request():
+        headers = {
+            'Authorization': f'Bearer {valid_access_token}'
+        }
+        response = requests.get(RESPONSE_TYPES_URL, headers=headers)
+>       assert response.status_code == 401
+E       assert 200 == 401
+E        +  where 200 = <Response [200]>.status_code
+
+py_test\api_test.py:104: AssertionError
+__________________ test_rate_limiting_response_types_request __________________
+
+    def test_rate_limiting_response_types_request():
+        headers = {
+            'Authorization': f'Bearer {valid_access_token}'
+        }
+        for _ in range(50):
+            response = requests.get(RESPONSE_TYPES_URL, headers=headers)
+            status_code = response.status_code
+    
+>       assert status_code == 429
+E       assert 200 == 429
+
+py_test\api_test.py:115: AssertionError
+- generated xml file: C:\Users\Llew\Documents\Llewellyn_Storage\Aura_QA_Case_Study\logs\pytest_results.xml -
+=========================== short test summary info ===========================
+FAILED py_test/api_test.py::test_invalid_credentials_access_token_request - a...
+FAILED py_test/api_test.py::test_expired_access_token_response_types_request
+FAILED py_test/api_test.py::test_rate_limiting_response_types_request - asser...
+======================== 3 failed, 8 passed in 56.76s =========================
+05-2023-08 10:49:26,70
+============================= test session starts =============================
+platform win32 -- Python 3.7.9, pytest-7.4.0, pluggy-1.2.0
+rootdir: C:\Users\Llew\Documents\Llewellyn_Storage\Aura_QA_Case_Study
+collected 11 items
+
+py_test\api_test.py .F...FF....                                          [100%]
+
+================================== FAILURES ===================================
+________________ test_invalid_credentials_access_token_request ________________
+
+    def test_invalid_credentials_access_token_request():
+        headers = {
+            'Content-Type': 'application/json'
+        }
+        data = {
+            "clientId": valid_client_id,
+            "clientSecret": "sL0uix7wwHk6HUN7P66ogyfv246oxgEL"
+        }
+        response = requests.post(TOKEN_URL,headers=headers ,json=data)
+>       assert response.status_code == 401
+E       assert 500 == 401
+E        +  where 500 = <Response [500]>.status_code
+
+py_test\api_test.py:67: AssertionError
+______________ test_expired_access_token_response_types_request _______________
+
+    def test_expired_access_token_response_types_request():
+        headers = {
+            'Authorization': f'Bearer {valid_access_token}'
+        }
+        response = requests.get(RESPONSE_TYPES_URL, headers=headers)
+>       assert response.status_code == 401
+E       assert 200 == 401
+E        +  where 200 = <Response [200]>.status_code
+
+py_test\api_test.py:104: AssertionError
+__________________ test_rate_limiting_response_types_request __________________
+
+    def test_rate_limiting_response_types_request():
+        headers = {
+            'Authorization': f'Bearer {valid_access_token}'
+        }
+        for _ in range(50):
+            response = requests.get(RESPONSE_TYPES_URL, headers=headers)
+            status_code = response.status_code
+    
+>       assert status_code == 429
+E       assert 200 == 429
+
+py_test\api_test.py:115: AssertionError
+=========================== short test summary info ===========================
+FAILED py_test/api_test.py::test_invalid_credentials_access_token_request - a...
+FAILED py_test/api_test.py::test_expired_access_token_response_types_request
+FAILED py_test/api_test.py::test_rate_limiting_response_types_request - asser...
+======================== 3 failed, 8 passed in 54.19s =========================

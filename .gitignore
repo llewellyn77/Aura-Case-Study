@@ -1,0 +1,12 @@
+# python cache
+*.pyc
+
+# idea and vscode files
+/.idea
+/.vscode
+
+# .env file
+#/.env
+
+# venv file
+/venv
